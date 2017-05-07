@@ -8,4 +8,5 @@ Deep-based Image Retrieval
   [Keras](https://keras.io/#installation)  
   h5py: `pip install h5py`  
   Pillow: `pip install Pillow`  
+  [FALCONN](https://github.com/FALCONN-LIB/FALCONN)  
 

@@ -24,8 +24,6 @@ class FeatureGenerator:
         
         imgs = np.array(imgs)
         print imgs.shape
-        imgs = imgs[:, :, :, ::-1]
-        print imgs.shape
         return self.preprocess_input(imgs)
 
     def generate_feature(self, imgs):
