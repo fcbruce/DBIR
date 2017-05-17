@@ -8,17 +8,37 @@
 
 import numpy as np
 import json
+import random
+import os
 
 from CacheLoader import CacheLoader
 
-def load_features():
+image_folder = '../data/256_ObjectCategories/'
 
-    cache = CacheLoader()
-    keys = cache.get_all_keys()
-    dataset = np.array([json.loads(cache.get(key)) for key in keys], dtype=np.float32)
+def load_features(db=0):
 
-    return keys, dataset
+    cache = CacheLoader(db=db)
+
+    queries = []
+    query_keys = set()
+    
+    for subfolder in os.listdir(image_folder):
+        images = os.listdir(os.path.join(image_folder, subfolder))
+        images = [ img for img in images if img.endswith('.jpg') ]
+        keys = random.sample(images, 5)
+        for key in keys:
+            queries.append((subfolder, key, np.array(json.loads(cache.get(key)), dtype=np.float32)))
+            query_keys.add(key)
+
+
+    all_keys = cache.get_all_keys() 
+    all_keys = [ key for key in all_keys if key not in query_keys]
+    dataset = np.array([ json.loads(cache.get(key)) for key in all_keys ], dtype=np.float32)
+    length = len(all_keys)
+    key2id = dict(zip(all_keys, range(length)))
+
+    return all_keys, dataset, queries
     
 
 if __name__ == '__main__':
-    load_feature()
+    load_features()

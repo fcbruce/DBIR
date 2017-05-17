@@ -10,7 +10,6 @@ import redis
 
 from decorators import singleton
 
-@singleton
 class CacheLoader:
 
     def __init__(self, host='localhost', port=6379, db=0, flush_db=False):

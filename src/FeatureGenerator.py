@@ -10,8 +10,8 @@ import numpy as np
 
 class FeatureGenerator:
 
-    def __init__(self, model, target_size, preprocess_input, weights='imagenet'):
-        self.model = model(weights=weights, include_top=False, pooling='max')
+    def __init__(self, model, target_size, preprocess_input, weights='imagenet', pooling='max'):
+        self.model = model(weights=weights, include_top=False, pooling=pooling)
         self.target_size = target_size
         self.preprocess_input = preprocess_input
     
