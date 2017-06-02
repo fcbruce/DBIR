@@ -11,14 +11,16 @@ import json
 from VGG16FeatureGenerator import VGG16FeatureGenerator
 from XceptionFeatureGenerator import XceptionFeatureGenerator
 from Res50FeatureGenerator import Res50FeatureGenerator
+from InceptionV3FeatureGenerator import InceptionV3FeatureGenerator
 from CacheLoader import CacheLoader
 
 image_folder = '../data/256_ObjectCategories/'
 
 if __name__ == '__main__':
 
-    #cache = CacheLoader(host='localhost', port=6379, db=13) # Xception
-    cache = CacheLoader(host='localhost', port=6379, db=11) # Res50
+    # cache = CacheLoader(host='localhost', port=6379, db=13) # Xception
+    # cache = CacheLoader(host='localhost', port=6379, db=11) # Res50
+    cache = CacheLoader(host='localhost', port=6379, db=15) # InceptionV3
     # cache = CacheLoader() # VGG16
 
     for subfolder in os.listdir(image_folder):
@@ -27,7 +29,8 @@ if __name__ == '__main__':
 
         # generator = VGG16FeatureGenerator()
         # generator = XceptionFeatureGenerator()
-        generator = Res50FeatureGenerator()
+        # generator = Res50FeatureGenerator()
+        generator = InceptionV3FeatureGenerator()
         images =  [generator.load_img(image) for image in image_paths]
         images = generator.img_preprocess(images)
         features = generator.generate_feature(images)

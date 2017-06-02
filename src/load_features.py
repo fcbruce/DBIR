@@ -15,7 +15,9 @@ from CacheLoader import CacheLoader
 
 image_folder = '../data/256_ObjectCategories/'
 
-def load_features(db=0):
+def load_features(db=0, seed=None):
+
+    random.seed(seed)
 
     cache = CacheLoader(db=db)
 

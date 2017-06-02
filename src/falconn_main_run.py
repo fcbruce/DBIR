@@ -20,7 +20,7 @@ def run(database, feature):
 
 if __name__ == '__main__':
     
-    keys, dataset, queries = load_features(db=11)
+    keys, dataset, queries = load_features(db=13)
     dataset = normalize(dataset)
 
     params = FalconnLSH.get_params()
@@ -40,24 +40,24 @@ if __name__ == '__main__':
     map50 = 0.0
 
     for q in queries:
-        print q[1]
+        # print q[1]
 
         nn, knns = run(database, q[2])
-        print keys[nn]
+        # print keys[nn]
         ap50 = .0
         ap10 = .0
         j = 0.
         i = 0.
         n = len(knns)
         for knn in knns:
-            print keys[knn],
+            # print keys[knn],
             j += 1
             if q[1][:3] == keys[knn][:3]: 
                 i += 1
                 ap50 += i / j / 50
                 ap10 += i / j / 10
             if j == 10: map10 += ap10
-        print
+        # print
         map50 += ap50
 
         if q[1][:3] == keys[nn][:3]: hit += 1
